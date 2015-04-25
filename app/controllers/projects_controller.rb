@@ -28,7 +28,6 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    p params
     @project = Project.find(params[:id])
     if @project.update(project_params)
       redirect_to @project, notice: "Project has been updated."
@@ -36,6 +35,12 @@ class ProjectsController < ApplicationController
       flash[:alert] = "Project has not been updated."
       render "edit"
     end
+  end
+
+  def destroy
+    @project = Project.find(params[:id])
+    @project.destroy
+    redirect_to projects_path, notice: "Project has been deleted."
   end
 
   private
