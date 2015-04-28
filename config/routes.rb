@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   end
 
   resources :users, except: [:destroy, :index]
+
+  get '/signin', to: "sessions#new"
+  post '/signin', to: "sessions#create"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
