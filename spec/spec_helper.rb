@@ -43,6 +43,7 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 
@@ -87,4 +88,17 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   # Kernel.srand config.seed
 
+end
+module AuthenticationHelpers
+  def sign_in_as!(user)
+    visit '/signin'
+    fill_in "Name", with: user.name
+    fill_in "Password", with: user.password
+    click_button "Sign in"
+    expect(page).to have_content("Signed in successfully.")
+  end
+end
+
+RSpec.configure do |c|
+  c.include AuthenticationHelpers, type: :feature
 end
